@@ -76,7 +76,7 @@ Accuracy: 0.922
 ## DON Evaluation
 To evaluate DON result in detail, run `DON_Training/testCorrespondace_O2O.py` to visualize the finding matching point between 2 seleted pair of images. These two images should both contain some same objects (at least one).
 The result should look similar as below:
-![](https://i.imgur.com/AmXXUJR.jpg | width=100)
+![](./doc/AmXXUJR.jpg)
 
 
 ## Picking Training
