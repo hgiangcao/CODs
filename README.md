@@ -1,6 +1,6 @@
-# ITRI x CGILab: Picking Cluttered Objects
+# Reinforcement Learning for Picking Cluttered General Objects with Dense Object Descriptors
 ## Codes
-The project is uploaded here: https://github.com/hgiangcao/ITRIProject
+The project is uploaded here: https://github.com/hgiangcao/CODs
 
 
 Note that the data is for demonstrate purpose only. You might want to download full data for training DON at: https://drive.google.com/file/d/1kazXNIBVy-ziNpd8-mt7g7-Mtyb8VYhY/view?usp=sharing
@@ -76,7 +76,8 @@ Accuracy: 0.922
 ## DON Evaluation
 To evaluate DON result in detail, run `DON_Training/testCorrespondace_O2O.py` to visualize the finding matching point between 2 seleted pair of images. These two images should both contain some same objects (at least one).
 The result should look similar as below:
-![](./doc/AmXXUJR.jpg)
+
+<img src="./doc/AmXXUJR.jpg" height="200">
 
 
 ## Picking Training
@@ -126,9 +127,11 @@ You might want to change the implementation in `ITRP/real/realsenseCam.py` and `
 
 
 The objects we used in our experiments:
-![](https://i.imgur.com/2EHjIfY.jpg =250x)
+
+<img src="./doc/2EHjIfY.jpeg" height="200">
 Our real experiment robot setup:
-![](https://i.imgur.com/e8mnyko.jpg =250x))
+
+<img src="./doc/e8mnyko.jpeg" height="200">
 
 ## Supplementary videos
 * We also uploaded some demonstration videos of picking, grasping, and finding matching points:
@@ -138,5 +141,16 @@ https://drive.google.com/file/d/1XJdk2ARhOOriptnwe73lJxnCEmdP8LO8/view?usp=shari
 
 ## 
 
-## Getting Help
-If there is any problem while runing the tutorial, please contact to us. We will try our best to help you resolve the problem.
+
+#### Citing
+
+If this work is useful for your reserach, please consider to cite:
+
+```
+@article{giangcao2022cods,
+  title={Reinforcement Learning for Picking Cluttered General Objects with Dense Object Descriptors},
+  author={Hoang-Giang Cao, Weihao Zeng, I-Chen Wu},
+  journal={IEEE International Conference on Robotics and Automation},
+  year={2022}
+}
+```
