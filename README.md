@@ -27,27 +27,20 @@ We created notebook files for the tutorial:
 * DON_Picking_Real_tutorial: tutorial for test picking cluttered objects.
 
 ## DON Data
-The data for training Sim-to-Real Dense Object Nets is organized as follow:
+The data for training CODs is organized as follow:
 ```
 |-- DON_data
     |-- GraspNet_models (all in one 87 GraspNet 3D vertex models and vertex color)
     |   |-- allModels.pkl
     |   |-- allModelsCollor.pkl
-    |-- GraspNet_train_O2O_real 
+    |-- GraspNet_train_O2O_sm_lg_orig 
     |   |-- Object99/
     |   |   |-- 000/
     |   |   |-- 000/
     |   |   |-- ... ...
     |   |   |-- 029/
     |   |-- intrinsic.txt
-    |-- GraspNet_train_O2O_sim_sm_lg_orig 
-    |   |-- Object99/
-    |   |   |-- 000/
-    |   |   |-- 000/
-    |   |   |-- ... ...
-    |   |   |-- 029/
-    |   |-- intrinsic.txt
-    |-- GraspNet_train_O2O_sim_sm_lg_rd 
+    |-- GraspNet_train_O2O_sm_lg_rd 
     |   |-- Object99/
     |   |   |-- 000/
     |   |   |-- 000/
@@ -115,23 +108,6 @@ run : `python clientPicking.py --num_envs=2 --host="localhost" --port =123 --nOb
 run: `python serverPickingRUNetEval.py --port =123 --pretrained="path_to_file"
 `
 Check the parameters `opt` in each file to configure the training in detail.
-
-## Picking Real Evaluation
-Run step by step notebook file `notebook/DON_Picking_Real_tutorial.ipynb`
-Note that the current script work with: 
-* Camera: Realsence D435i
-* Robot: UR-3
-* Suction: e-Pick
-
-You might want to change the implementation in `ITRP/real/realsenseCam.py` and `ITRP/real/UR3_robot.py` to be compatible with your camera, robot, and e-Pick
-
-
-The objects we used in our experiments:
-
-<img src="./doc/2EHjIfY.jpeg" height="200">
-Our real experiment robot setup:
-
-<img src="./doc/e8mnyko.jpeg" height="200">
 
 ## Supplementary videos
 * We also uploaded some demonstration videos of picking, grasping, and finding matching points:
