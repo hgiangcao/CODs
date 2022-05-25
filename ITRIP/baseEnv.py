@@ -21,7 +21,7 @@ class SuctionBaseEnv(abc.ABC):
 
         raise NotImplementedError
 
-    def done(self) -> bool:
+    def CODse(self) -> bool:
         # return whether the basket is empty
 
         raise NotImplementedError

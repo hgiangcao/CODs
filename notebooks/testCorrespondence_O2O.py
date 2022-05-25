@@ -14,16 +14,16 @@ from sklearn.preprocessing import StandardScaler
 import sys
 
 sys.path.insert(1, '..')
-from DON_Training.DataGenerator_O2O import DataGenerator,processImage, convertToHeatmap
+from CODs_Training.DataGenerator_O2O import DataGenerator,processImage, convertToHeatmap
 from ITRIP.Configuration import *
 import matplotlib.pyplot as plt
-import DON_Training.evaluation.plotting as dc_plotting
+import CODs_Training.evaluation.plotting as dc_plotting
 from PIL import Image, ImageDraw, ImageFont
-from DON_Training.DensObjectNet import DensObjectNet
+from CODs_Training.DensObjectNet import DensObjectNet
 import warnings
 
 warnings.simplefilter(action='ignore', category=FutureWarning)
-from DON_Training.dense_correspondence_network import DenseCorrespondenceNetwork
+from CODs_Training.dense_correspondence_network import DenseCorrespondenceNetwork
 
 from numpy import linalg as LA
 
@@ -48,7 +48,7 @@ def draw_circle(event, x, y, flags, param):
         y  -= config["Width"]
         #print (x,y)
         if (x < config["W"]):
-            matchPoint, _ = DON.getBestMatchPointOnly((x, y), descrtion1, descrtion2, mask2)
+            matchPoint, _ = CODs.getBestMatchPointOnly((x, y), descrtion1, descrtion2, mask2)
 
             lu2, lv2 = x, y-config["Width"]
 
@@ -79,13 +79,13 @@ p = np.zeros(4)
 g_2_p = np.zeros(4)
 setting = "RGBD"
 config["model"] = "Resnet"
-model_path = "CODs_GraspNet_RGBD_Resnet8/DON_1001"
-#"DON_Res348_cross_RGBD_Resnet_orig"
-DON = DensObjectNet(setting=setting, pretrained=model_path)
+model_path = "CODs_GraspNet_RGBD_Resnet8/CODs_1001"
+#"CODs_Res348_cross_RGBD_Resnet_orig"
+CODs = DensObjectNet(setting=setting, pretrained=model_path)
 
 
-FOLDER_NAME1=  "../DON_data/" + "GraspNet_train_O2O_sm_lg_rd/Object99/000"
-FOLDER_NAME2= "../DON_data/" + "GraspNet_train_O2O_sm_lg_rd/Object99/002"
+FOLDER_NAME1=  "../CODs_data/" + "GraspNet_train_O2O_sm_lg_rd/Object99/000"
+FOLDER_NAME2= "../CODs_data/" + "GraspNet_train_O2O_sm_lg_rd/Object99/002"
 
 idx2 = 0
 idx1 = 0
@@ -101,8 +101,8 @@ poseCamera2, imageColor2, depth2, mask2, indexMap2, segmentMap2,uvSeg_2, arrObje
 
 
 
-descrtion1 = DON.getDescriptor(imageColor1,depth1)
-descrtion2 = DON.getDescriptor(imageColor2,depth2)
+descrtion1 = CODs.getDescriptor(imageColor1,depth1)
+descrtion2 = CODs.getDescriptor(imageColor2,depth2)
 
 imageColor1 = np.array(imageColor1*255).astype(np.uint8)
 imageColor2 = np.array(imageColor2*255).astype(np.uint8)
@@ -177,9 +177,9 @@ while True:
     #cv2.imshow('des', desImg)
 
     if cv2.waitKey(1) == ord('f'):
-        cv2.imwrite('DON_Result_des/'+model_path+'_matchingIndicate1_rd.png', img)
-        cv2.imwrite('DON_Result_des/'+model_path+'_consistentClutteredDesctiptor1_rd.png', consistentImage)
-        cv2.imwrite("DON_Result_des/'+model_path+'_mergedImag2e%03d_rd.jpg"%(idx),mergedImg)
+        cv2.imwrite('CODs_Result_des/'+model_path+'_matchingIndicate1_rd.png', img)
+        cv2.imwrite('CODs_Result_des/'+model_path+'_consistentClutteredDesctiptor1_rd.png', consistentImage)
+        cv2.imwrite("CODs_Result_des/'+model_path+'_mergedImag2e%03d_rd.jpg"%(idx),mergedImg)
         print ("Saved")
         idx+=1
     cv2.imshow("video",mergedImg)

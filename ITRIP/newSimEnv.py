@@ -8,7 +8,7 @@ from tqdm import tqdm
 import numpy as np
 import itertools
 import quaternion
-from DON_Picking.Configuration import *
+from CODs_Picking.Configuration import *
 from pyrep.objects.shape import Shape
 from pyrep.const import PrimitiveShape
 import open3d as o3d
@@ -171,7 +171,7 @@ class SimSuctionEnv(SuctionBaseEnv):
         clear & & python
 
 
-        self.errorCode = StatusCode.DONE_NONE
+        self.errorCode = StatusCode.CODsE_NONE
         self.totalReward = 0
         self.countPickedObject = 0
         self.objectOut = 0
@@ -475,7 +475,7 @@ class SimSuctionEnv(SuctionBaseEnv):
 
         return obs
 
-    def done(self) -> bool:
+    def CODse(self) -> bool:
         return len(self.objects) == 0
 
     def _normal_from_pcd(self, pcd, x, y):
@@ -533,12 +533,12 @@ class SimSuctionEnv(SuctionBaseEnv):
 
     def isTerminal(self):
         #grab all objects
-        if (self.done()):
-            self.errorCode = StatusCode.DONE_FINISH
+        if (self.CODse()):
+            self.errorCode = StatusCode.CODsE_FINISH
             return True
 
         if (self.steps > self.MAX_ATTEMP_ACTION):
-            self.errorCode = StatusCode.DONE_EXCEEDED_MAX_ACTION
+            self.errorCode = StatusCode.CODsE_EXCEEDED_MAX_ACTION
             return True
 
         return False
@@ -546,7 +546,7 @@ class SimSuctionEnv(SuctionBaseEnv):
     def step(self, action, cam='basket', pick_dir=None) -> Tuple[float, Dict]:
         #pick_dir = [0,0,1]
         ret = 0
-        self.errorCode = StatusCode.DONE_NONE
+        self.errorCode = StatusCode.CODsE_NONE
         isTerminal = False
         realAction = 0
         currentNObject = len(self.objects)
@@ -570,8 +570,8 @@ class SimSuctionEnv(SuctionBaseEnv):
         loc = pcd[x, y]
         # max exxed
         isTerminal = self.isTerminal()
-        if (self.errorCode == StatusCode.DONE_EXCEEDED_MAX_ACTION or self.errorCode == StatusCode.DONE_FINISH):
-            if (self.errorCode == StatusCode.DONE_EXCEEDED_MAX_ACTION):
+        if (self.errorCode == StatusCode.CODsE_EXCEEDED_MAX_ACTION or self.errorCode == StatusCode.CODsE_FINISH):
+            if (self.errorCode == StatusCode.CODsE_EXCEEDED_MAX_ACTION):
                 reward = -1
             self.totalReward += reward
             #isTerminal = True
@@ -765,10 +765,10 @@ class SimSuctionEnv(SuctionBaseEnv):
             reward = -0.5
             self.objectOut +=(currentNObject - len(self.objects))
 
-        self.errorCode = StatusCode.DONE_FAIL if grasped_obj is None else StatusCode.DONE_SUCC
+        self.errorCode = StatusCode.CODsE_FAIL if grasped_obj is None else StatusCode.CODsE_SUCC
 
         isTerminal = self.isTerminal()
-        #if (self.errorCode == StatusCode.DONE_FINISH ):
+        #if (self.errorCode == StatusCode.CODsE_FINISH ):
         #    reward += 0.5
 
         self.totalReward += reward
@@ -798,7 +798,7 @@ if __name__ == '__main__':
     env = SimSuctionEnv((320, 320), headless=True)
 
     for _ in tqdm(itertools.count()):
-        if env.done():
+        if env.CODse():
             env.reset()
         depth, rgb = env.take_obs()
         x, y = np.random.randint([70, 40], [240, 260])

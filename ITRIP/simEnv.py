@@ -31,7 +31,7 @@ from pyrep.objects import Shape
 from pyrep.const import  *
 from pyrep.textures.texture import Texture
 from pyrep.objects.dummy import Dummy
-from DON_Picking.Configuration import *
+from CODs_Picking.Configuration import *
 
 
 UR5_PICK_JPOS = [0, 0, -np.pi/2, 0, np.pi/2, 0]
@@ -126,7 +126,7 @@ class SimSuctionEnv(SuctionBaseEnv):
 
         self._empty_basket_pcd = None
 
-        self.errorCode = DONE_NONE
+        self.errorCode = CODsE_NONE
         self.isCrashed = False
         self.totalExecuteTime = 0
         self.totalReward = 0
@@ -165,7 +165,7 @@ class SimSuctionEnv(SuctionBaseEnv):
     def reset(self, num_objs=10, hand_obs=False, basket_obs=True,objectID = None,randomTexture= False) -> Tuple[int, Dict]:
 
         # reset variable
-        self.errorCode = DONE_NONE
+        self.errorCode = CODsE_NONE
         self.isCrashed = False
         self.totalExecuteTime = 0
         self.totalReward = 0
@@ -264,16 +264,16 @@ class SimSuctionEnv(SuctionBaseEnv):
     def isTerminal(self):
         #crash
         if (self.isCrashed):
-            self.errorCode = DONE_CRASH
+            self.errorCode = CODsE_CRASH
             return True
 
         #grab all objects
-        if (self.done()):
-            self.errorCode = DONE_FINISH
+        if (self.CODse()):
+            self.errorCode = CODsE_FINISH
             return True
 
         if (self.steps > self.MAX_ATTEMP_ACTION):
-            self.errorCode = DONE_EXCEEDED_MAX_ACTION
+            self.errorCode = CODsE_EXCEEDED_MAX_ACTION
             return True
 
         return False
@@ -379,7 +379,7 @@ class SimSuctionEnv(SuctionBaseEnv):
     def checkCrash(self, accumulateTime):
         self.totalExecuteTime += accumulateTime
         if (self.totalExecuteTime > MAX_EXECUTE_TIME):
-            self.errorCode = DONE_CRASH
+            self.errorCode = CODsE_CRASH
             self.isCrashed = True
             #print ("CRASH",self.totalExecuteTime)
             self.totalExecuteTime = 0
@@ -424,7 +424,7 @@ class SimSuctionEnv(SuctionBaseEnv):
             return None
         '''
         if (max_cnt >=30 ):#or idle_cnt >=10):
-            self.errorCode = DONE_CRASH
+            self.errorCode = CODsE_CRASH
             self.isCrashed = True
             return False
         '''
@@ -490,7 +490,7 @@ class SimSuctionEnv(SuctionBaseEnv):
 
         return obs
 
-    def done(self) -> bool:
+    def CODse(self) -> bool:
         return len(self.objects) == 0
 
     def _normal_from_pcd(self, pcd, x, y):
@@ -549,10 +549,10 @@ class SimSuctionEnv(SuctionBaseEnv):
         loc = pcd[x, y]
 
         isTerminal = self.isTerminal()
-        if (self.errorCode == DONE_EXCEEDED_MAX_ACTION or self.errorCode == DONE_FINISH):
+        if (self.errorCode == CODsE_EXCEEDED_MAX_ACTION or self.errorCode == CODsE_FINISH):
             #print ("Never Happened here")
             reward = 0
-            if (self.errorCode == DONE_FINISH):
+            if (self.errorCode == CODsE_FINISH):
                 #print("+Reward finish return here B")
                 reward += 0.5
             self.totalReward += reward
@@ -651,7 +651,7 @@ class SimSuctionEnv(SuctionBaseEnv):
             if self.arm.check_arm_collision(self.crate) or self.suction_cup_body.check_collision(self.crate):
                 reward = - 0.1
                 self.totalReward += reward
-                #self.errorCode = DONE_CRASH
+                #self.errorCode = CODsE_CRASH
                 #isTerminal = True
                 returnInfo = {
                     'detect_outside': 0,
@@ -683,7 +683,7 @@ class SimSuctionEnv(SuctionBaseEnv):
             # IK failed
             reward = -1
             self.totalReward += reward
-            self.errorCode = DONE_CRASH
+            self.errorCode = CODsE_CRASH
             isTerminal = True
             returnInfo = {
                 'detect_outside': 0,
@@ -720,7 +720,7 @@ class SimSuctionEnv(SuctionBaseEnv):
                 '''
                 reward = -1
                 self.totalReward +=reward
-                self.errorCode = DONE_CRASH
+                self.errorCode = CODsE_CRASH
                 isTerminal = True
                 returnInfo = {
                     'detect_outside': 0,
@@ -764,10 +764,10 @@ class SimSuctionEnv(SuctionBaseEnv):
 
         isTerminal = self.isTerminal()
 
-        if (self.errorCode == DONE_FINISH):
+        if (self.errorCode == CODsE_FINISH):
             #print ("+Reward finish return here B")
             reward += 0.5
-        elif (self.errorCode == DONE_EXCEEDED_MAX_ACTION):
+        elif (self.errorCode == CODsE_EXCEEDED_MAX_ACTION):
             reward = 0
 
         self.totalReward += reward
@@ -801,7 +801,7 @@ if __name__ == '__main__':
     env = SimSuctionEnv((320, 320), headless=True)
 
     for _ in tqdm(itertools.count()):
-        if env.done():
+        if env.CODse():
             env.reset()
         depth, rgb = env.take_obs()
         x, y = np.random.randint([70, 40], [240, 260])

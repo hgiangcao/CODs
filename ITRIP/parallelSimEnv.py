@@ -32,8 +32,8 @@ class ParallelSimWorker(object):
         return self.sim.take_obs(hand_obs=hand_obs,
                                  basket_obs=basket_obs)
 
-    def done(self) -> bool:
-        return self.sim.done()
+    def CODse(self) -> bool:
+        return self.sim.CODse()
     
     def stop(self) -> None:
         self.sim.stop()
@@ -73,8 +73,8 @@ class VectorParallelSim(object):
         
         return transpose(res)
 
-    def done(self) -> List[bool]:
-        return [sim.done.remote() for sim in self.sims]
+    def CODse(self) -> List[bool]:
+        return [sim.CODse.remote() for sim in self.sims]
 
     def stop(self):
         [sim.stop.remote() for sim in self.sims]
