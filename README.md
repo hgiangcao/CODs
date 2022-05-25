@@ -4,7 +4,7 @@
 :----------------------:|:----------------------:|:----------------------:
 
 ## Tutorial
-- [Tutorial for running the project](./doc/tutorial.md)
+- [Tutorial for running the project](./tutorial.md)
 
 ## Supplementary videos
 * ICRA presentation videos:
