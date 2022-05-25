@@ -4,7 +4,7 @@
 :----------------------:|:----------------------:|:----------------------:
 
 ## Tutorial
-- [](./doc/tutorial.md)
+- [Tutorial for running the project](./doc/tutorial.md)
 
 ## Supplementary videos
 * We also uploaded some demonstration videos of picking, grasping, and finding matching points:
