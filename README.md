@@ -1,9 +1,9 @@
-# ITRI x CGILab: Picking Cluttered Objects
+# Reinforcement Learning for Picking Cluttered General Objects with Dense Object Descriptors
 ## Codes
-The project is uploaded here: https://github.com/hgiangcao/ITRIProject
+The project is uploaded here: https://github.com/hgiangcao/CODs
 
 
-Note that the data is for demonstrate purpose only. You might want to download full data for training DON at: https://drive.google.com/file/d/1kazXNIBVy-ziNpd8-mt7g7-Mtyb8VYhY/view?usp=sharing
+Note that the data is for demonstrate purpose only. You might want to download full data for training CODs at: https://drive.google.com/file/d/1kazXNIBVy-ziNpd8-mt7g7-Mtyb8VYhY/view?usp=sharing
 
 The full assets files are uploaded at: https://drive.google.com/file/d/1AA-ItHr4mHeTF-vfOy_nL9JfBGPStE6v/view?usp=sharing
 You shoulld copy and replace all files in assets folder.
@@ -23,31 +23,24 @@ pip install torch==1.5.1+cu101 torchvision==0.6.1+cu101 -f https://download.pyto
 We created notebook files for the tutorial:
 * checkData.ipynb: verifying data.
 * checkDataGenerator: verifying data generator for match and non-match points.
-* DON_training_tutorial: tutorial for training DON.
+* DON_training_tutorial: tutorial for training CODs.
 * DON_Picking_Real_tutorial: tutorial for test picking cluttered objects.
 
 ## DON Data
-The data for training Sim-to-Real Dense Object Nets is organized as follow:
+The data for training CODs is organized as follow:
 ```
 |-- DON_data
     |-- GraspNet_models (all in one 87 GraspNet 3D vertex models and vertex color)
     |   |-- allModels.pkl
     |   |-- allModelsCollor.pkl
-    |-- GraspNet_train_O2O_real 
+    |-- GraspNet_train_O2O_sm_lg_orig 
     |   |-- Object99/
     |   |   |-- 000/
     |   |   |-- 000/
     |   |   |-- ... ...
     |   |   |-- 029/
     |   |-- intrinsic.txt
-    |-- GraspNet_train_O2O_sim_sm_lg_orig 
-    |   |-- Object99/
-    |   |   |-- 000/
-    |   |   |-- 000/
-    |   |   |-- ... ...
-    |   |   |-- 029/
-    |   |-- intrinsic.txt
-    |-- GraspNet_train_O2O_sim_sm_lg_rd 
+    |-- GraspNet_train_O2O_sm_lg_rd 
     |   |-- Object99/
     |   |   |-- 000/
     |   |   |-- 000/
@@ -59,24 +52,25 @@ To verify that we have all data for runing the project properly, please run `che
 ## DON Training
 
 
-For training DON, please refer to `notebooks/DON_Training_tutorial.ipynb`.
+For training CODs, please refer to `notebooks/DON_Training_tutorial.ipynb`.
 Edit `ITRIP/config.yml` for changing the training parameters. 
 To change the path to save the model (and also the tensorboard), change the `setting` parameter in `ITRIP/config.yml`.
 
 Please check the path to save the model and the tensorboard carefully.
 
-After finish the training, there is a small test to verify that we succesfully trained the DON. The program will load a pre-trained model and evaluate 1000 matching-point pairs from a random pair of images with random scene type (Sim-Sim, Real-Real, Sim-Real).
+After finish the training, there is a small test to verify that we succesfully trained the DON. The program will load a pre-trained model and evaluate 1000 matching-point pairs from a random pair of images.
 The result should look similar as below:
 ```
-DONE training DON
+DONE training CODs
 Error Distance: 0.0449
 Accuracy: 0.922
 ```
 
-## DON Evaluation
-To evaluate DON result in detail, run `DON_Training/testCorrespondace_O2O.py` to visualize the finding matching point between 2 seleted pair of images. These two images should both contain some same objects (at least one).
+## CODs Evaluation
+To evaluate CODs result in detail, run `DON_Training/testCorrespondace_O2O.py` to visualize the finding matching point between 2 seleted pair of images. These two images should both contain some same objects (at least one).
 The result should look similar as below:
-![](https://i.imgur.com/AmXXUJR.jpg | width=100)
+
+<img src="./doc/AmXXUJR.jpg" height="200">
 
 
 ## Picking Training
@@ -115,21 +109,6 @@ run: `python serverPickingRUNetEval.py --port =123 --pretrained="path_to_file"
 `
 Check the parameters `opt` in each file to configure the training in detail.
 
-## Picking Real Evaluation
-Run step by step notebook file `notebook/DON_Picking_Real_tutorial.ipynb`
-Note that the current script work with: 
-* Camera: Realsence D435i
-* Robot: UR-3
-* Suction: e-Pick
-
-You might want to change the implementation in `ITRP/real/realsenseCam.py` and `ITRP/real/UR3_robot.py` to be compatible with your camera, robot, and e-Pick
-
-
-The objects we used in our experiments:
-![](https://i.imgur.com/2EHjIfY.jpg =250x)
-Our real experiment robot setup:
-![](https://i.imgur.com/e8mnyko.jpg =250x))
-
 ## Supplementary videos
 * We also uploaded some demonstration videos of picking, grasping, and finding matching points:
 https://drive.google.com/file/d/1p1dxUSUGxx9E0rwDH7hEwIDaAH60_lya/view?usp=sharing
@@ -138,5 +117,16 @@ https://drive.google.com/file/d/1XJdk2ARhOOriptnwe73lJxnCEmdP8LO8/view?usp=shari
 
 ## 
 
-## Getting Help
-If there is any problem while runing the tutorial, please contact to us. We will try our best to help you resolve the problem.
+
+#### Citing
+
+If this work is useful for your reserach, please consider to cite:
+
+```
+@article{giangcao2022cods,
+  title={Reinforcement Learning for Picking Cluttered General Objects with Dense Object Descriptors},
+  author={Hoang-Giang Cao, Weihao Zeng, I-Chen Wu},
+  journal={IEEE International Conference on Robotics and Automation},
+  year={2022}
+}
+```
