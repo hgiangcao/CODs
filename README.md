@@ -3,7 +3,7 @@
 The project is uploaded here: https://github.com/hgiangcao/CODs
 
 
-Note that the data is for demonstrate purpose only. You might want to download full data for training DON at: https://drive.google.com/file/d/1kazXNIBVy-ziNpd8-mt7g7-Mtyb8VYhY/view?usp=sharing
+Note that the data is for demonstrate purpose only. You might want to download full data for training CODs at: https://drive.google.com/file/d/1kazXNIBVy-ziNpd8-mt7g7-Mtyb8VYhY/view?usp=sharing
 
 The full assets files are uploaded at: https://drive.google.com/file/d/1AA-ItHr4mHeTF-vfOy_nL9JfBGPStE6v/view?usp=sharing
 You shoulld copy and replace all files in assets folder.
@@ -23,7 +23,7 @@ pip install torch==1.5.1+cu101 torchvision==0.6.1+cu101 -f https://download.pyto
 We created notebook files for the tutorial:
 * checkData.ipynb: verifying data.
 * checkDataGenerator: verifying data generator for match and non-match points.
-* DON_training_tutorial: tutorial for training DON.
+* DON_training_tutorial: tutorial for training CODs.
 * DON_Picking_Real_tutorial: tutorial for test picking cluttered objects.
 
 ## DON Data
@@ -52,22 +52,22 @@ To verify that we have all data for runing the project properly, please run `che
 ## DON Training
 
 
-For training DON, please refer to `notebooks/DON_Training_tutorial.ipynb`.
+For training CODs, please refer to `notebooks/DON_Training_tutorial.ipynb`.
 Edit `ITRIP/config.yml` for changing the training parameters. 
 To change the path to save the model (and also the tensorboard), change the `setting` parameter in `ITRIP/config.yml`.
 
 Please check the path to save the model and the tensorboard carefully.
 
-After finish the training, there is a small test to verify that we succesfully trained the DON. The program will load a pre-trained model and evaluate 1000 matching-point pairs from a random pair of images with random scene type (Sim-Sim, Real-Real, Sim-Real).
+After finish the training, there is a small test to verify that we succesfully trained the DON. The program will load a pre-trained model and evaluate 1000 matching-point pairs from a random pair of images.
 The result should look similar as below:
 ```
-DONE training DON
+DONE training CODs
 Error Distance: 0.0449
 Accuracy: 0.922
 ```
 
-## DON Evaluation
-To evaluate DON result in detail, run `DON_Training/testCorrespondace_O2O.py` to visualize the finding matching point between 2 seleted pair of images. These two images should both contain some same objects (at least one).
+## CODs Evaluation
+To evaluate CODs result in detail, run `DON_Training/testCorrespondace_O2O.py` to visualize the finding matching point between 2 seleted pair of images. These two images should both contain some same objects (at least one).
 The result should look similar as below:
 
 <img src="./doc/AmXXUJR.jpg" height="200">
