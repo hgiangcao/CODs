@@ -7,10 +7,8 @@
 - [Tutorial for running the project](./doc/tutorial.md)
 
 ## Supplementary videos
-* We also uploaded some demonstration videos of picking, grasping, and finding matching points:
-https://drive.google.com/file/d/1p1dxUSUGxx9E0rwDH7hEwIDaAH60_lya/view?usp=sharing
-* NeurIPS presentation videos:
-https://drive.google.com/file/d/1XJdk2ARhOOriptnwe73lJxnCEmdP8LO8/view?usp=sharing
+* ICRA presentation videos:
+[Video](https://youtu.be/LvK9b0nfs3E)
 
 
 #### Citing
