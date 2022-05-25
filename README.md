@@ -1,7 +1,7 @@
 ## Reinforcement Learning for Picking Cluttered General Objects with Dense Object Descriptors
 
 ![](./doc/Matching_img.gif)  |  ![](./doc/SceneConsistency_img.gif) | ![](./doc/CODDepth.gif)
-:-------------------------:|:-------------------------:|:-------------------------:
+:----------------------:|:----------------------:|:----------------------:
 
 ## Codes
 The project is uploaded here: https://github.com/hgiangcao/CODs
